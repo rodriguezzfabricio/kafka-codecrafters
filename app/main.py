@@ -1,16 +1,21 @@
-import socket  # noqa: F401
-
+import socket
 
 def main():
-    # You can use print statements as follows for debugging,
-    # they'll be visible when running tests.
+    # This print is just for debugging logs:
     print("Logs from your program will appear here!")
 
-    # Uncomment this to pass the first stage
+    # Create a TCP server on port 9092.
+    # By default, 'socket.create_server()' will:
+    #   - create a socket
+    #   - bind it to the given host/port
+    #   - set it to listen mode
     #
-    # server = socket.create_server(("localhost", 9092), reuse_port=True)
-    # server.accept() # wait for client
+    # reuse_port=True allows you to re-run without "port already in use" errors 
+    # (depending on your environment).
+    server_socket = socket.create_server(("0.0.0.0", 9092), reuse_port=True)
 
+    # Block until a client connects (the tester will connect to this port).
+    server_socket.accept()
 
 if __name__ == "__main__":
     main()
